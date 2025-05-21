@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Servicio profesional de Mantenimiento Eléctrico. Instalaciones, reparaciones y mantenimiento preventivo para sistemas eléctricos residenciales e industriales.">
+    <title>Mantenimiento Eléctrico | creativo.art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --azul-tecnologico: #2A5C9D;
+            --naranja-creativo: #FF6B35;
+            --purpura-laser: #6E44FF;
+            --amarillo-electrico: #F1C40F;
+            --gris-fondo: #111;
+            --degradado-header: linear-gradient(135deg, var(--azul-tecnologico), var(--purpura-laser));
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--gris-fondo);
+            color: #eee;
+        }
+        /* Header consistente con index.html */
+        .service-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-BpQrMJPARJbDtjJR_QTcaJKKQ1w394oAYggiYPj6af-2LEeJtxBzqdk&s=10') center/cover no-repeat;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        .service-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 75% 30%, rgba(255,255,255,0.15) 0%, transparent 40%);
+            z-index: 0;
+        }
+        .service-header h1 {
+            position: relative;
+            z-index: 1;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .service-header p {
+            position: relative;
+            z-index: 1;
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        /* Menú flotante consistente */
+        .floating-menu {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .menu-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 60px;
+            height: 60px;
+        }
+        .menu-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            background: rgba(0,0,0,0.85);
+            min-width: 220px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            top: 100%;
+            right: 0;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 15px;
+        }
+        .menu-content a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: all 0.25s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            font-size: 1rem;
+        }
+        .menu-content a:last-child {
+            border-bottom: none;
+        }
+        .menu-content a:hover {
+            background: rgba(255,255,255,0.1);
+            padding-left: 25px;
+            color: var(--naranja-creativo);
+        }
+        .menu-content a i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+        .floating-menu:hover .menu-content {
+            display: block;
+            opacity: 1;
+            transform: translateY(8px);
+        }
+        
+        /* Contenido de servicios eléctricos */
+        .services-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        .services-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--amarillo-electrico);
+            font-family: 'Montserrat', sans-serif;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid #333;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        .service-icon {
+            background: rgba(0,0,0,0.3);
+            padding: 2rem;
+            text-align: center;
+            font-size: 3rem;
+            color: var(--amarillo-electrico);
+        }
+        .service-content {
+            padding: 1.5rem;
+        }
+        .service-content h3 {
+            color: var(--amarillo-electrico);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .service-content p {
+            color: #aaa;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        .service-content ul {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+        .service-content ul li {
+            padding: 0.3rem 0;
+            color: #ccc;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .service-content ul li:before {
+            content: "•";
+            color: var(--amarillo-electrico);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        
+        /* Sección de seguridad eléctrica */
+        .safety-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwSxgBeA2j6CnwqOKJc6P9rPYjD-jCiBs6et8j16R9XXvKFvGVAX9jja0&s=10') center/cover no-repeat;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .safety-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .safety-title {
+            color: var(--amarillo-electrico);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .safety-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .safety-card {
+            background: rgba(34, 34, 34, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .safety-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .safety-icon {
+            font-size: 2.5rem;
+            color: var(--amarillo-electrico);
+            margin-bottom: 1rem;
+        }
+        .safety-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        .safety-card p {
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+        
+        /* Sección de contacto */
+        .contact-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLQgD9fo5xtJ2V6drWmdMn7ToM2wzA04v98fxhloP1BOkmO6GjfvDMLWJX&s=10') center/cover no-repeat;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .contact-title {
+            color: var(--amarillo-electrico);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .contact-text {
+            color: #eee;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        .contact-btn {
+            display: inline-block;
+            background: var(--amarillo-electrico);
+            color: #333;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+        .contact-btn:hover {
+            background: #f39c12;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer consistente */
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #333;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+        }
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.15);
+            color: var(--naranja-creativo);
+        }
+        .tiktok-text {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: #aaa;
+        }
+        .tiktok-text a {
+            color: var(--naranja-creativo);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .tiktok-text a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Botón de volver mejorado */
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 50px;
+            height: 50px;
+            z-index: 1000;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: var(--naranja-creativo);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .service-header h1 {
+                font-size: 2.5rem;
+            }
+            .service-header p {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            .services-title, .safety-title, .contact-title {
+                font-size: 1.8rem;
+            }
+            .floating-menu, .back-btn {
+                top: 20px;
+                right: 20px;
+            }
+            .menu-btn, .back-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+            .menu-content {
+                min-width: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Menú flotante consistente con index.html -->
+    <div class="floating-menu">
+        <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu-content">
+            <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+            <a href="index.html#servicios"><i class="fas fa-cogs"></i> Servicios</a>
+            <a href="index.html#sobre-mi"><i class="fas fa-user"></i> Sobre Mí</a>
+            <a href="index.html#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+            <a href="drones.html"><i class="fas fa-helicopter"></i> Videografía Aérea</a>
+            <a href="impresion3d.html"><i class="fas fa-cube"></i> Impresión 3D</a>
+            <a href="laser.html"><i class="fas fa-cut"></i> Corte Láser</a>
+            <a href="domotica.html"><i class="fas fa-robot"></i> Domótica</a>
+            <a href="soporte-tics.html"><i class="fas fa-microchip"></i> Soporte TIC's</a>
+        </div>
+    </div>
+
+    <!-- Botón de volver mejorado -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <!-- Header de servicio -->
+    <div class="service-header" data-aos="fade-down">
+        <h1>Mantenimiento Eléctrico</h1>
+        <p data-aos="fade-up" data-aos-delay="200">Soluciones profesionales para instalaciones eléctricas residenciales e industriales</p>
+    </div>
+
+    <!-- Servicios Eléctricos -->
+    <div class="services-container">
+        <h2 class="services-title" data-aos="fade-up">Nuestros Servicios Eléctricos</h2>
+        <div class="services-grid">
+            <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Instalaciones Residenciales</h3>
+                    <p>Soluciones eléctricas completas para hogares y departamentos.</p>
+                    <ul>
+                        <li>Instalación eléctrica completa</li>
+                        <li>Actualización de sistemas antiguos</li>
+                        <li>Instalación de paneles y breaker</li>
+                        <li>Cableado estructurado</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-icon">
+                    <i class="fas fa-industry"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Instalaciones Industriales</h3>
+                    <p>Sistemas eléctricos para negocios y espacios industriales.</p>
+                    <ul>
+                        <li>Tableros de distribución</li>
+                        <li>Sistemas trifásicos</li>
+                        <li>Motores y maquinaria</li>
+                        <li>Automatización industrial</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="service-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Mantenimiento Preventivo</h3>
+                    <p>Revisiones periódicas para evitar fallos y garantizar seguridad.</p>
+                    <ul>
+                        <li>Diagnóstico de instalaciones</li>
+                        <li>Pruebas de continuidad</li>
+                        <li>Revisión de conexiones</li>
+                        <li>Medición de carga eléctrica</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="service-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Reparaciones de Emergencia</h3>
+                    <p>Solución rápida a fallas eléctricas peligrosas.</p>
+                    <ul>
+                        <li>Cortocircuitos</li>
+                        <li>Sobrecargas</li>
+                        <li>Fallas en interruptores</li>
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="service-icon">
+                    <i class="fas fa-solar-panel"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Sistemas de Energía Alternativa</h3>
+                    <p>Soluciones sustentables para ahorro energético.</p>
+                    <ul>
+                        <li>Paneles solares</li>
+                        <li>Sistemas híbridos</li>
+                        <li>Inversores y reguladores</li>
+                        <li>Baterías de respaldo</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="service-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="service-content">
+                    <h3>Iluminación Especializada</h3>
+                    <p>Diseño e instalación de sistemas de iluminación.</p>
+                    <ul>
+                        <li>Iluminación LED</li>
+                        <li>Sistemas de bajo consumo</li>
+                        <li>Iluminación decorativa</li>
+                        <li>Automatización de luces</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de seguridad eléctrica -->
+    <div class="safety-section" data-aos="fade-up">
+        <div class="safety-container">
+            <h2 class="safety-title">Seguridad Eléctrica</h2>
+            <p class="contact-text">La seguridad es nuestra prioridad. Te ayudamos a prevenir riesgos eléctricos en tu hogar o negocio.</p>
+            
+            <div class="safety-grid">
+                <div class="safety-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="safety-icon">
+                        <i class="fas fa-fire-extinguisher"></i>
+                    </div>
+                    <h3>Prevención de Incendios</h3>
+                    <p>Identificamos y corregimos riesgos de cortocircuitos que puedan causar incendios eléctricos.</p>
+                </div>
+                <div class="safety-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="safety-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Protección contra Descargas</h3>
+                    <p>Instalamos sistemas de tierra física y protección contra descargas eléctricas.</p>
+                </div>
+                <div class="safety-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="safety-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Seguridad Familiar</h3>
+                    <p>Protegemos a tu familia con sistemas eléctricos seguros y a prueba de niños.</p>
+                </div>
+                <div class="safety-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="safety-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Cumplimiento de Normas</h3>
+                    <p>Todas nuestras instalaciones cumplen con las normas y estándares de seguridad vigentes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de contacto -->
+    <div class="contact-section" data-aos="fade-up">
+        <div class="contact-container">
+            <h2 class="contact-title">¿Necesitas un electricista confiable?</h2>
+            <p class="contact-text">Ofrecemos soluciones eléctricas seguras y eficientes. Contáctanos para una evaluación sin costo y recibe un presupuesto personalizado.</p>
+            <a href="https://wa.me/525658685585" class="contact-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer consistente con index.html -->
+    <footer id="contacto">
+        <p class="tiktok-text" data-aos="fade-up">¿Quieres conocernos más? <a href="https://www.tiktok.com/@_creativo.art?_t=ZS-8wL12BgDAKl&_r=1" target="_blank">Síguenos en TikTok</a></p>
+        <p class="tiktok-text" data-aos="fade-up" data-aos-delay="200">o Escríbenos en <a href="https://wa.me/525658685585" target="_blank">Whatsapp</a></p>
+        
+        <div class="social-links" data-aos="fade-up" data-aos-delay="400">
+            <a href="https://www.tiktok.com/@_creativo.art?_t=ZS-8wL12BgDAKl&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://wa.me/525658685585" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        
+        <p data-aos="fade-up" data-aos-delay="600">© <span id="year"></span> creativo.art | Contacto: 5658685585</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar AOS (Animate On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-in-out'
+        });
+
+        // Actualizar año automáticamente
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Configuración Lightbox
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fadeDuration': 200,
+            'imageFadeDuration': 200,
+            'positionFromTop': 100
+        });
+
+        // Alternar menú al hacer clic (para móviles)
+        document.querySelector('.menu-btn').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const menuContent = document.querySelector('.menu-content');
+            if (menuContent.style.display === 'block') {
+                menuContent.style.display = 'none';
+                menuContent.style.opacity = '0';
+            } else {
+                menuContent.style.display = 'block';
+                setTimeout(() => {
+                    menuContent.style.opacity = '1';
+                    menuContent.style.transform = 'translateY(8px)';
+                }, 10);
+            }
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function() {
+            const menuContent = document.querySelector('.menu-content');
+            menuContent.style.display = 'none';
+            menuContent.style.opacity = '0';
+        });
+    </script>
+</body>
+</html>
